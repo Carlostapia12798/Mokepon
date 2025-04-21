@@ -1,0 +1,126 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Special+Gothic+Condensed+One&display=swap');
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #001A6E;
+}
+
+/*Clase*/
+.titulo {
+    color:white;
+    font-size: 32px;
+}
+
+.subtitulo {
+    color:white;
+    font-size: 24px;
+}
+/*id*/
+#Selecionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tarjetas, .tarjetas-ataques {
+    display: flex;
+    gap: 10px;
+}
+
+.tarjeta-de-mokepon {
+    width: 170px;
+    height: 100px;
+    background: #074799;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    color:white;
+    justify-content: center;
+    align-items : center;
+}
+
+.tarjeta-de-mokepon img {
+    width: 80px;
+}
+
+#btn-seleccion {
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid white;
+    color: aliceblue;
+    margin-top: 30px;
+    font-family: "Poppins", sans-serif;
+}
+
+input {
+    display: none;
+}
+
+input:checked + label{
+    background-color: #009990;
+} 
+
+#Seleccionar-ataque {
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-ataque {
+    background-color: #074799;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    width: 150px;
+}
+
+#Mensajes {
+    background: #E1FFBB;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+    flex-direction: column;
+    align-items: center
+}
+
+#btn-reiniciar {
+    border: none;
+    color: #074799;
+    background-color: transparent;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.ataques {
+    display: grid;
+    grid-template-columns: 100px 100px;
+}
+
+.ataques div {
+    text-align: center;
+    color: white;
+}
+
+#Vida-jugador, #Vida-enemigo {
+    font-size: 32px;
+    margin-bottom: 0;
+}
+
+
+@media (max-width: 360px) {
+    .tarjetas, .tarjetas-ataques {
+        flex-direction: column;
+    }
+
+}
+
