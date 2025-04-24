@@ -1,0 +1,22 @@
+{
+  "name": "mokepon",
+  "version": "1.0.0",
+  "description": "<h1 align= center> Mokepon 🔥💧🌱</h1>\r Mokepon es un juego de batalla por turnos inspirado en Pokémon, desarrollado con HTML, CSS y JavaScript. En este juego, los jugadores pueden seleccionar su Mokepon y enfrentarse a oponentes controlados por la computadora en emocionantes combates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carlostapia12798/Mokepon.git"
+  },
+  "author": "Carlos Tapia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carlostapia12798/Mokepon/issues"
+  },
+  "homepage": "https://github.com/Carlostapia12798/Mokepon#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
