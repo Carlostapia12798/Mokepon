@@ -25,10 +25,12 @@ body {
 .tarjetas, .tarjetas-ataques {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center
 }
 
 .tarjeta-de-mokepon {
-    width: 170px;
+    width: 180px;
     height: 100px;
     background: #074799;
     padding: 10px;
@@ -115,9 +117,33 @@ input:checked + label{
     margin-bottom: 0;
 }
 
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-@media (max-width: 360px) {
+#ver-mapa button { 
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid white;
+    color: aliceblue;
+    font-family: "Poppins", sans-serif;
+    margin: 10px 0;
+}
+
+@media (max-width: 560px) {
     .tarjetas, .tarjetas-ataques {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 300px) {
+    #ver-mapa div{
+        display: flex;
+        align-items: center;
         flex-direction: column;
     }
 
