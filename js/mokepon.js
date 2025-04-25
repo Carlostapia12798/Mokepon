@@ -66,9 +66,34 @@ alturaQueBuscamos = (anchoDeLaPantalla * 600) / 800;
 Mapa.width = anchoDeLaPantalla;
 Mapa.height = alturaQueBuscamos;
 
+const hipodogeAtaques = [
+  { nombre: "💧", id: "btn-agua" },
+  { nombre: "💧", id: "btn-agua" },
+  { nombre: "💧", id: "btn-agua" },
+  { nombre: "🔥", id: "btn-fuego" },
+  { nombre: "🌱", id: "btn-planta" },
+];
+
+const capipepoAtaques = [
+  { nombre: "🌱", id: "btn-planta" },
+  { nombre: "🌱", id: "btn-planta" },
+  { nombre: "🌱", id: "btn-planta" },
+  { nombre: "💧", id: "btn-agua" },
+  { nombre: "🔥", id: "btn-fuego" },
+];
+
+const ratigueyaAtaques = [
+  { nombre: "🔥", id: "btn-fuego" },
+  { nombre: "🔥", id: "btn-fuego" },
+  { nombre: "🔥", id: "btn-fuego" },
+  { nombre: "💧", id: "btn-agua" },
+  { nombre: "🌱", id: "btn-planta" },
+];
+
 //clases
 class Mokepon {
-  constructor(nombre, foto, vida, fotoMapa) {
+  constructor(nombre, foto, vida, fotoMapa, id = null) {
+    this.id = id;
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
@@ -113,65 +138,29 @@ let ratigueya = new Mokepon(
 let pydos = new Mokepon(
   "Pydos",
   "/mokepon/assets/mokepons_mokepon_pydos_attack.png",
-  3
+  3,
+  "/mokepon/assets/mokepons_mokepon_pydos_attack.png"
 );
 
 let tucupalma = new Mokepon(
   "Tucupalma",
   "/mokepon/assets/mokepons_mokepon_tucapalma_attack.png",
-  3
+  3,
+  "/mokepon/assets/mokepons_mokepon_tucapalma_attack.png"
 );
 
 let langostelvis = new Mokepon(
   "Langostelvis",
   "/mokepon/assets/mokepons_mokepon_langostelvis_attack.png",
-  3
-);
-
-let hipodogeEnemigo = new Mokepon(
-  "Hipodoge",
-  "/mokepon/assets/mokepons_mokepon_hipodoge_attack.webp",
   3,
-  "/mokepon/assets/hipodoge.png"
+  "/mokepon/assets/mokepons_mokepon_langostelvis_attack.png"
 );
 
-let capipepoEnemigo = new Mokepon(
-  "Capipepo",
-  "/mokepon/assets/mokepons_mokepon_capipepo_attack.webp",
-  3,
-  "/mokepon/assets/capipepo.png"
-);
+hipodoge.ataques.push(...hipodogeAtaques);
 
-let ratigueyaEnemigo = new Mokepon(
-  "Ratigueya",
-  "/mokepon/assets/mokepons_mokepon_ratigueya_attack.webp",
-  3,
-  "/mokepon/assets/ratigueya.png"
-);
+capipepo.ataques.push(...capipepoAtaques);
 
-hipodoge.ataques.push(
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🌱", id: "btn-planta" }
-);
-
-capipepo.ataques.push(
-  { nombre: "🌱", id: "btn-planta" },
-  { nombre: "🌱", id: "btn-planta" },
-  { nombre: "🌱", id: "btn-planta" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "🔥", id: "btn-fuego" }
-);
-
-ratigueya.ataques.push(
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "🌱", id: "btn-planta" }
-);
+ratigueya.ataques.push(...ratigueyaAtaques);
 
 pydos.ataques.push(
   { nombre: "🔥", id: "btn-fuego" },
@@ -194,30 +183,6 @@ langostelvis.ataques.push(
   { nombre: "💧", id: "btn-agua" },
   { nombre: "🔥", id: "btn-fuego" },
   { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🌱", id: "btn-planta" }
-);
-
-hipodogeEnemigo.ataques.push(
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🌱", id: "btn-planta" }
-);
-
-capipepoEnemigo.ataques.push(
-  { nombre: "🌱", id: "btn-planta" },
-  { nombre: "🌱", id: "btn-planta" },
-  { nombre: "🌱", id: "btn-planta" },
-  { nombre: "💧", id: "btn-agua" },
-  { nombre: "🔥", id: "btn-fuego" }
-);
-
-ratigueyaEnemigo.ataques.push(
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "🔥", id: "btn-fuego" },
-  { nombre: "💧", id: "btn-agua" },
   { nombre: "🌱", id: "btn-planta" }
 );
 
@@ -460,9 +425,9 @@ function PintarCanvas() {
 
   enviarPoscicion(miMokepon.x, miMokepon.y);
 
-  hipodogeEnemigo.pintarMokepon();
-  capipepoEnemigo.pintarMokepon();
-  ratigueyaEnemigo.pintarMokepon();
+  // hipodogeEnemigo.pintarMokepon();
+  // capipepoEnemigo.pintarMokepon();
+  // ratigueyaEnemigo.pintarMokepon();
 
   if (miMokepon.velocidadX !== 0 || miMokepon.velocidadY !== 0) {
     revisarColision(hipodogeEnemigo);
@@ -482,6 +447,42 @@ function enviarPoscicion(x, y) {
       x,
       y,
     }),
+  }).then(function (res) {
+    if (res.ok) {
+      res.json().then(function ({ enemigos }) {
+        console.log(enemigos);
+        enemigos.forEach(function (enemigo) {
+          let mokeponEnemigo = null;
+          const mokeponNombre = enemigo.mokepon.nombre || "";
+          if (mokeponNombre === "Hipodoge") {
+            mokeponEnemigo = new Mokepon(
+              "Hipodoge",
+              "/mokepon/assets/mokepons_mokepon_hipodoge_attack.webp",
+              3,
+              "/mokepon/assets/hipodoge.png"
+            );
+          } else if (mokeponNombre === "Capipepo") {
+            mokeponEnemigo = new Mokepon(
+              "Capipepo",
+              "/mokepon/assets/mokepons_mokepon_capipepo_attack.webp",
+              3,
+              "/mokepon/assets/capipepo.png"
+            );
+          } else if (mokeponNombre === "Ratigueya") {
+            mokeponEnemigo = new Mokepon(
+              "Ratigueya",
+              "/mokepon/assets/mokepons_mokepon_ratigueya_attack.webp",
+              3,
+              "/mokepon/assets/ratigueya.png"
+            );
+          }
+          mokeponEnemigo.x = enemigo.x;
+          mokeponEnemigo.y = enemigo.y;
+
+          mokeponEnemigo.pintarMokepon();
+        });
+      });
+    }
   });
 }
 
