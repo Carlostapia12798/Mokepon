@@ -457,6 +457,9 @@ function PintarCanvas() {
   lienzo.clearRect(0, 0, Mapa.width, Mapa.height);
   lienzo.drawImage(mapaFondo, 0, 0, Mapa.width, Mapa.height);
   miMokepon.pintarMokepon();
+
+  enviarPoscicion(miMokepon.x, miMokepon.y);
+
   hipodogeEnemigo.pintarMokepon();
   capipepoEnemigo.pintarMokepon();
   ratigueyaEnemigo.pintarMokepon();
@@ -467,6 +470,19 @@ function PintarCanvas() {
     revisarColision(ratigueyaEnemigo);
   } else {
   }
+}
+
+function enviarPoscicion(x, y) {
+  fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      x,
+      y,
+    }),
+  });
 }
 
 function moverArriba() {

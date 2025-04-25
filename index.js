@@ -24,6 +24,11 @@ class Jugador {
   asiganrMokepon(mokepon) {
     this.mokepon = mokepon;
   }
+
+  actualizarPosicion(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 }
 
 // Clase Mokepon
@@ -37,7 +42,7 @@ class Mokepon {
 app.get("/unirse", (req, res) => {
   const id = `${Math.random()}`; // Creamos un ID aleatorio como string
   const jugador = new Jugador(id); // Creamos un nuevo jugador con ese ID
-  jugadores.push(jugador); // Lo agregamos al array de jugadores
+  jugadores.push(jugador);
   res.setHeader("Access-Control-Allow-Origin", "*"); // Permitimos conexión desde cualquier origen
   res.send(id); // Enviamos el ID como respuesta
 });
@@ -46,7 +51,7 @@ app.get("/unirse", (req, res) => {
 app.post("/mokepon/:jugadorId", (req, res) => {
   const jugadorId = req.params.jugadorId || ""; // Obtenemos el ID del jugador desde la URL
   const mascota = req.body.mokepon || ""; // Obtenemos el nombre del Mokepon desde el body de la petición
-  const mokepon = new Mokepon(mascota); // Creamos una instancia de Mokepon con ese nombre
+  const mokepon = new Mokepon(mascota); // Creamos una instancia de Mokepon
 
   // Buscamos al jugador correspondiente
   const jugadorIndex = jugadores.findIndex(
@@ -57,8 +62,22 @@ app.post("/mokepon/:jugadorId", (req, res) => {
   if (jugadorIndex >= 0) {
     jugadores[jugadorIndex].asiganrMokepon(mokepon);
   }
-
   res.end(); // Terminamos la respuesta
+});
+
+// ✅ Endpoint POST para actualizar la posición del jugador
+app.post("/mokepon/:jugadorId/posicion", (req, res) => {
+  const jugadorId = req.params.jugadorId || "";
+  const x = req.body.x || 0;
+  const y = req.body.y || 0;
+
+  const jugadorIndex = jugadores.findIndex(
+    (jugador) => jugadorId === jugador.id
+  );
+  if (jugadorIndex >= 0) {
+    jugadores[jugadorIndex].actualizarPosicion(x, y);
+  }
+  res.end();
 });
 
 // Activamos el servidor en el puerto 8080
