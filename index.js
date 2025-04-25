@@ -58,9 +58,6 @@ app.post("/mokepon/:jugadorId", (req, res) => {
     jugadores[jugadorIndex].asiganrMokepon(mokepon);
   }
 
-  console.log(jugadores); // Mostramos los jugadores por consola
-  console.log(jugadorId); // También mostramos el ID recibido
-
   res.end(); // Terminamos la respuesta
 });
 
