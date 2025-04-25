@@ -23,6 +23,7 @@ const Mapa = document.getElementById("mapa");
 
 let jugadorId = null;
 let mokepones = [];
+let mokeponEnemigos = [];
 let ataqueJugador = [];
 let ataqueEnemigo = [];
 let opcionDeMokepones;
@@ -425,6 +426,10 @@ function PintarCanvas() {
 
   enviarPoscicion(miMokepon.x, miMokepon.y);
 
+  mokeponEnemigos.forEach(function (mokepon) {
+    mokepon.pintarMokepon();
+  });
+
   // hipodogeEnemigo.pintarMokepon();
   // capipepoEnemigo.pintarMokepon();
   // ratigueyaEnemigo.pintarMokepon();
@@ -451,7 +456,7 @@ function enviarPoscicion(x, y) {
     if (res.ok) {
       res.json().then(function ({ enemigos }) {
         console.log(enemigos);
-        enemigos.forEach(function (enemigo) {
+        mokeponEnemigos = enemigos.map(function (enemigo) {
           let mokeponEnemigo = null;
           const mokeponNombre = enemigo.mokepon.nombre || "";
           if (mokeponNombre === "Hipodoge") {
@@ -479,7 +484,7 @@ function enviarPoscicion(x, y) {
           mokeponEnemigo.x = enemigo.x;
           mokeponEnemigo.y = enemigo.y;
 
-          mokeponEnemigo.pintarMokepon();
+          return mokeponEnemigo;
         });
       });
     }
