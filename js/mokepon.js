@@ -22,6 +22,7 @@ const seccionVerMapar = document.getElementById("ver-mapa");
 const Mapa = document.getElementById("mapa");
 
 let jugadorId = null;
+let enemigoId = null;
 let mokepones = [];
 let mokeponEnemigos = [];
 let ataqueJugador = [];
@@ -317,8 +318,39 @@ function secuenciaAtaque() {
         boton.style.background = "#112f58";
         boton.disabled = true;
       }
-      ataqueAleatorioEnemigo();
+      if (ataqueJugador.length === 5) {
+        enviarAtaques();
+      }
     });
+  });
+}
+
+function enviarAtaques() {
+  fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ataques: ataqueJugador,
+    }),
+  });
+
+  intervalo = setInterval(obtenerAtaques, 50);
+}
+
+function obtenerAtaques() {
+  fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`).then(function (
+    res
+  ) {
+    if (res.ok) {
+      res.json().then(function ({ ataques }) {
+        if (ataques.length === 5) {
+          ataqueEnemigo = ataques;
+          combate();
+        }
+      });
+    }
   });
 }
 
@@ -357,6 +389,8 @@ function resultadoDelCombate(jugador, enemigo) {
 }
 
 function combate() {
+  clearInterval(intervalo);
+
   for (let i = 0; i < ataqueJugador.length; i++) {
     if (ataqueJugador[i] === ataqueEnemigo[i]) {
       resultadoDelCombate(i, i);
@@ -428,18 +462,8 @@ function PintarCanvas() {
 
   mokeponEnemigos.forEach(function (mokepon) {
     mokepon.pintarMokepon();
+    revisarColision(mokepon);
   });
-
-  // hipodogeEnemigo.pintarMokepon();
-  // capipepoEnemigo.pintarMokepon();
-  // ratigueyaEnemigo.pintarMokepon();
-
-  if (miMokepon.velocidadX !== 0 || miMokepon.velocidadY !== 0) {
-    revisarColision(hipodogeEnemigo);
-    revisarColision(capipepoEnemigo);
-    revisarColision(ratigueyaEnemigo);
-  } else {
-  }
 }
 
 function enviarPoscicion(x, y) {
@@ -464,21 +488,24 @@ function enviarPoscicion(x, y) {
               "Hipodoge",
               "/mokepon/assets/mokepons_mokepon_hipodoge_attack.webp",
               3,
-              "/mokepon/assets/hipodoge.png"
+              "/mokepon/assets/hipodoge.png",
+              enemigo.id
             );
           } else if (mokeponNombre === "Capipepo") {
             mokeponEnemigo = new Mokepon(
               "Capipepo",
               "/mokepon/assets/mokepons_mokepon_capipepo_attack.webp",
               3,
-              "/mokepon/assets/capipepo.png"
+              "/mokepon/assets/capipepo.png",
+              enemigo.id
             );
           } else if (mokeponNombre === "Ratigueya") {
             mokeponEnemigo = new Mokepon(
               "Ratigueya",
               "/mokepon/assets/mokepons_mokepon_ratigueya_attack.webp",
               3,
-              "/mokepon/assets/ratigueya.png"
+              "/mokepon/assets/ratigueya.png",
+              enemigo.id
             );
           }
           mokeponEnemigo.x = enemigo.x;
@@ -570,6 +597,9 @@ function revisarColision(enemigo) {
   }
   detenerMovimiento();
   clearInterval(intervalo);
+  console.log("se realizo una colision");
+
+  enemigoId = enemigo.id;
   seccionSelecionataque.style.display = "flex";
   seccionVerMapar.style.display = "none";
   seleccionarMascotaEnemigo(enemigo);
