@@ -5,6 +5,12 @@ body {
     background-color: #001A6E;
 }
 
+/*deshabilitar el seleccionado del texto en los botones*/
+button {
+    user-select: none;
+}
+
+
 /*Clase*/
 .titulo {
     color:white;
